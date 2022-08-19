@@ -45,7 +45,6 @@ const Theme = createTheme({
             main: '#1f6dd6',
             dark: '#1646ae',
             darker: '#0f237d',
-
             contrastText: '#ffffff',
         },
 
@@ -69,5 +68,16 @@ const Theme = createTheme({
         },
     },
 })
+
+Theme.typography.title = {
+    display: 'flex',
+    fontFamily: Theme.fonts.title,
+    backgroundColor: Theme.palette.primary.main,
+    color: Theme.palette.tertiary.darker,
+    display: 'inline-block',
+    padding: '10px',
+    fontWeight: '300',
+    fontSize: '24px',
+}
 
 export { Theme }

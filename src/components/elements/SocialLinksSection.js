@@ -2,8 +2,8 @@ import React from 'react'
 
 import { Box } from '@mui/material'
 
-const ArticleBox = ({ children }) => {
+const SocialLinksSection = ({ children }) => {
     return <Box component="aside">{children}</Box>
 }
 
-export { ArticleBox }
+export { SocialLinksSection }

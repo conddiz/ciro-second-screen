@@ -1,0 +1,8 @@
+export { InputText } from './InputText'
+export { InputPassword } from './InputPassword'
+export { FormControl } from './FormControl'
+export { FormErrors } from './FormErrors'
+export { Form } from './Form'
+export { InputPhone } from './InputPhone'
+export { InputCep } from './InputCep'
+export { InputSwitch } from './InputSwitch'

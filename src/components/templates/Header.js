@@ -2,7 +2,7 @@ import React from 'react'
 
 import Image from 'next/image'
 
-import { Box, Container } from '@mui/material'
+import { Box } from '@mui/material'
 
 const Header = ({ children }) => {
     return (
@@ -11,7 +11,6 @@ const Header = ({ children }) => {
             sx={{
                 display: 'flex',
                 bgcolor: 'tertiary.darker',
-                display: 'flex',
                 flexDirection: 'row',
                 justifyContent: 'space-between',
                 alignItems: 'center',

@@ -6,9 +6,9 @@ import { Header, Footer } from '@ciro/components/templates'
 const Layout = ({ children }) => {
     return (
         <Box>
-            <Header>Header 2</Header>
+            <Header />
             <main>{children}</main>
-            <Footer>Footer 2</Footer>
+            <Footer />
         </Box>
     )
 }

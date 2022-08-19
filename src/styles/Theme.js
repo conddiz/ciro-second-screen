@@ -1,10 +1,18 @@
 import { createTheme } from '@mui/material/styles'
 import { blue, amber, grey } from '@mui/material/colors'
+import {
+    fontMontserrat,
+    fontSquadOne,
+    fontNewGroteskSquare,
+    fontGraphik,
+} from './fonts'
 
 const Theme = createTheme({
     fonts: {
-        primary: "'Montserrat', sans-serif",
+        primary: 'Montserrat',
         secundary: 'Squada One',
+        title: 'New Grotesk Square',
+        body: 'Graphik',
     },
     palette: {
         mode: 'light',
@@ -48,6 +56,16 @@ const Theme = createTheme({
             dark: grey['400'],
             darker: grey['500'],
             contrastText: grey['900'],
+        },
+    },
+    components: {
+        MuiCssBaseline: {
+            styleOverrides: `
+            ${fontMontserrat}
+            ${fontSquadOne}
+            ${fontNewGroteskSquare}
+            ${fontGraphik}
+            `,
         },
     },
 })

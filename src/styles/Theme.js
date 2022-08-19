@@ -9,20 +9,34 @@ const Theme = createTheme({
     palette: {
         mode: 'light',
 
+        // https://gka.github.io/palettes/#/5|s|00f07d,00dc5f,00b437|ffffe0,ff005e,93003a|1|1
         primary: {
-            lighter: blue[100],
-            light: blue[300],
-            main: blue[500],
-            dark: blue[700],
-            darker: blue[900],
-            contrastText: '#ffffff',
+            lighter: '#00f07d',
+            light: '#03e169',
+            main: '#03d257',
+            dark: '#02c347',
+            darker: '#00b437',
+            contrastText: '#000000',
         },
+
+        // https://gka.github.io/palettes/#/5|s|ffe13c,ffc800,ff9800|ffffe0,ff005e,93003a|1|1
         secondary: {
-            lighter: amber[100],
-            light: amber[300],
-            main: amber[500],
-            dark: amber[700],
-            darker: amber[900],
+            lighter: '#ffe13c',
+            light: '#ffd025',
+            main: '#ffbe13',
+            dark: '#ffac04',
+            darker: '#ff9800',
+
+            contrastText: '#000000',
+        },
+
+        // https://gka.github.io/palettes/#/5|s|00c8f5,0073ff,0f237d|ffffe0,ff005e,93003a|1|1
+        tertiary: {
+            lighter: '#00c8f5',
+            light: '#2598f0',
+            main: '#1f6dd6',
+            dark: '#1646ae',
+            darker: '#0f237d',
 
             contrastText: '#ffffff',
         },

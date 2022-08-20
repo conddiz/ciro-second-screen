@@ -61,7 +61,7 @@ const InputPhone = ({
                                 fontStyle: 'normal',
                                 fontWeight: '500',
                                 fontSize: '13px',
-                                padding: '15px 20px',
+                                padding: '15px 20px 15px 0',
                                 outline: '0',
                                 transition: 'all .2s ease-in',
                                 lineHeight: '1.15',

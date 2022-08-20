@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, createRef } from 'react'
 import * as yup from 'yup'
 import ReCAPTCHA from 'react-google-recaptcha'
 import _ from 'lodash'
@@ -21,6 +21,8 @@ import {
 } from '@mui/material'
 import LoadingButton from '@mui/lab/LoadingButton'
 
+import { isValidPhoneNumber } from 'mui-tel-input'
+
 import {
     Form,
     InputText,
@@ -29,95 +31,98 @@ import {
     InputCep,
     InputSwitch,
 } from '@ciro/components/form'
-import { isValidPhoneNumber } from 'mui-tel-input'
+import { GroupsModal } from '@ciro/components/elements'
 
 const JoinForm = () => {
     const [loading, setLoading] = useState(false)
     const [message, setMessage] = useState()
-    // const [event, setFormEvent] = React.useState({})
-    // const [formRef, setFormRef] = React.useState({})
-    // const [loading, setLoading] = React.useState(false)
-    // const [success, setSuccess] = React.useState(false)
-    // const [isModalOpen, setIsModalOpen] = React.useState(false)
-    // const [group, setGroup] = React.useState(null)
+    const [event, setFormEvent] = useState({})
+    const [formData, setFormData] = useState({})
+    const [formRef, setFormRef] = useState({})
+    const [success, setSuccess] = useState(false)
+    const [isModalOpen, setIsModalOpen] = useState(false)
+    const [group, setGroup] = useState(null)
 
-    // const [cep, setCep] = React.useState('')
-    // const [phone, setPhone] = React.useState('')
-    // const [checked, setChecked] = React.useState(false)
+    // const [cep, setCep] = useState('')
+    // const [phone, setPhone] = useState('')
+    // const [checked, setChecked] = useState(false)
 
-    // const recaptchaRef = React.createRef()
+    const recaptchaRef = createRef()
 
-    // const captchaReset = () => {
-    //     if (window.grecaptcha) grecaptcha.reset()
-    // }
+    const captchaReset = () => {
+        if (window.grecaptcha) grecaptcha.reset()
+    }
 
-    // const onReCAPTCHAChange = async (captchaCode) => {
-    //     const email = event.target.email.value
-    //     const nome = event.target.nome.value
-    //     const permissaoWhats = event.target.permite.checked
-
-    //     if (!captchaCode) {
-    //         console.log('no recaptcha code')
-    //         return
-    //     }
-    //     try {
-    //         let response = await fetch('/api/save-lead', {
-    //             method: 'POST',
-    //             body: JSON.stringify({
-    //                 email,
-    //                 nome,
-    //                 phone,
-    //                 cep,
-    //                 captcha: captchaCode,
-    //                 permiteWhats: permissaoWhats,
-    //             }),
-    //             headers: {
-    //                 'Content-Type': 'application/json',
-    //             },
-    //         })
-    //         if (response.ok) {
-    //             setSuccess(true)
-
-    //             response = await response.json()
-
-    //             if (permissaoWhats) {
-    //                 setGroup(response.group)
-    //                 setIsModalOpen(true)
-    //             }
-
-    //             setTimeout(() => {
-    //                 setSuccess(false)
-    //             }, 15000)
-    //             setFormEvent({})
-    //         } else {
-    //             const error = await response.json()
-    //             throw new Error(error.message)
-    //         }
-    //     } catch (error) {
-    //         alert(error?.message || 'Something went wrong')
-    //     } finally {
-    //         captchaReset()
-    //         setFormEvent({})
-    //         setLoading(false)
-    //     }
-    // }
-
-    const handleSubmit = (event) => {
+    const onReCAPTCHAChange = async (captchaCode) => {
         setLoading(true)
-        event.preventDefault()
-        setFormEvent(event)
 
-        const data = {
-            email: event.target.email.value,
-            nome: event.target.nome.value,
-            phone: event.target.tel.value,
-            cep: event.target.cep.value,
-            permiteWhats: event.target.permite.checked,
+        const email = formData.email
+        const nome = formData.nome
+        const phone = formData.phone
+        const cep = formData.cep
+        const permiteWhats = formData.permiteWhats
+
+        if (!captchaCode) {
+            console.log('no recaptcha code')
+            return
         }
+        try {
+            let response = await fetch('http://localhost:3001/api/save-lead', {
+                method: 'POST',
+                body: JSON.stringify({
+                    email,
+                    nome,
+                    phone,
+                    cep,
+                    captcha: captchaCode,
+                    permiteWhats: permiteWhats,
+                }),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+            if (response.ok) {
+                setSuccess(true)
+
+                response = await response.json()
+
+                if (permissaoWhats) {
+                    setGroup(response.group)
+                    setIsModalOpen(true)
+                }
+
+                setTimeout(() => {
+                    setSuccess(false)
+                }, 15000)
+                setFormEvent({})
+            } else {
+                const error = await response.json()
+                throw new Error(error.message)
+            }
+        } catch (error) {
+            alert(error?.message || 'Something went wrong')
+        } finally {
+            captchaReset()
+            setFormEvent({})
+            setLoading(false)
+        }
+    }
+
+    const handleSubmit = async (data) => {
+        setFormData(data)
+
+        const gtmData = {
+            email: data.email,
+            nome: data.nome,
+            phone: data.phone,
+            cep: data.cep,
+            permiteWhats: data.permiteWhats,
+        }
+
         TagManager.dataLayer({
             dataLayer: {
                 event: 'sign_up_leads',
-                data: data,
+                data: gtmData,
             },
         })
 
@@ -131,8 +136,6 @@ const JoinForm = () => {
     }
 
     const validations = yup.object({
-        fullname: yup.string().required('O campo "Nome" é obrigatório'),
-
         email: yup
             .string()
             .required('O campo "Email" é obrigatório')
@@ -142,7 +145,7 @@ const JoinForm = () => {
             .required('O campo "Telefone" é obrigatório')
             .test(
                 'valid-phone',
-                'O campo "Telefone" deve ser um telefone válido',
+                'O campo "Telefone" deve ser um telefone válido, com DDI e Código de Área',
                 (value) => {
                     return value == null || isValidPhoneNumber(value)
                 }
@@ -153,41 +156,12 @@ const JoinForm = () => {
             .matches(/[0-9]{5}-[0-9]{3}/i, {
                 message: 'CEP inválido',
                 excludeEmptyString: true,
-            })
-            .test(
-                'cep-from-emigrant',
-                'Quem mora fora do país não deve informar o CEP',
-                (value) => {
-                    const emigrant = yup.ref('emigrant')
-                    if (emigrant === true && value) {
-                        return false
-                    }
-                    return true
-                }
-            ),
+            }),
+        nome: yup.string().required('O campo "Nome" é obrigatório'),
     })
 
     return (
-        <Form
-            action="/api/save-lead"
-            method="POST"
-            onSubmit={handleSubmit}
-            id="registerForm"
-            validations={validations}
-            // ref={(el) => setFormRef(el)}
-            sx={{
-                display: 'grid',
-                gridTemplateColumns: { xs: '1fr', md: 'repeat(2, 1fr)' },
-                gap: '20px',
-                alignItems: 'flex-start',
-                justifyContent: 'flex-start',
-                transition: '.5s all',
-                opacity: '1',
-                width: '90%',
-                mx: 0,
-                mt: '20px',
-            }}
-        >
+        <Box>
             {message && (
                 <Alert
                     severity={message.level}
@@ -198,125 +172,97 @@ const JoinForm = () => {
                     {message.text}
                 </Alert>
             )}
-            {/* <ReCAPTCHA
-                ref={recaptchaRef}
-                size="invisible"
-                sitekey={process.env.RECAPTCHA_SITE}
-                onChange={onReCAPTCHAChange}
-                onSubmit={handleOnSubmit}
+
+            {success && (
+                <Alert
+                    severity="success"
+                    onClose={() => {
+                        setSuccess(false)
+                    }}
+                >
+                    <Typography variant="h6">
+                        Dados enviados com sucesso. Obrigado por se cadastrar!
+                    </Typography>
+
+                    {checked && (
+                        <a
+                            href="https://growp.app/i/n8uwd"
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            Não conseguiu acessar o grupo? Clique aqui!
+                        </a>
+                    )}
+                </Alert>
+            )}
+
+            <Form
+                action="/api/save-lead"
+                method="POST"
+                onSubmit={handleSubmit}
                 id="registerForm"
                 validations={validations}
-            /> */}
-            <InputText type="email" name="email" id="email" label="E-Mail*" />
-            <InputPhone name="phone" id="phone" label="Telefone (com DDD)*" />
-            <InputCep name="cep" id="cep" label="CEP*" />
-            <InputText
-                type="text"
-                name="fullname"
-                id="fullname"
-                label="Nome*"
-            />
-
-            <InputSwitch
-                name="allowGroup"
-                label=" Quero fazer parte do grupo Aliança Rebelde"
-            />
-
-            <Button variant="contained" color="primary">
-                Enviar
-            </Button>
-
-            {/* <S.Row visible={!success}>
-                <InputText
-                    name="email"
-                    type="email"
-                    placeholder="*E-mail"
-                    required
-                />
-
-                <InputText
-                    name="tel"
-                    type="text"
-                    value={phone}
-                    onChange={(e) => setPhone(PHONE_MASK(e.target.value))}
-                    placeholder="Telefone (com DDD)*"
-                    maxLength={15}
-                    required
-                />
-                <InputText
-                    name="cep"
-                    type="text"
-                    value={cep}
-                    onChange={(e) => setCep(CEP_MASK(e.target.value))}
-                    placeholder="*CEP"
-                    required
-                />
-                <InputText name="nome" type="text" placeholder="Nome" />
-                <S.FormRadio>
-                    <span
-                        style={{
-                            color: '#0F237C',
-                            fontWeight: 700,
-                            fontFamily: 'Graphik',
-                        }}
-                    >
-                        Quero fazer parte do grupo Aliança Rebelde
-                    </span>
-                    <input
-                        type="checkbox"
-                        name="permite"
-                        defaultChecked={checked}
-                        onChange={() => setChecked(!checked)}
-                    />
-                    <span className="checkmark"></span>
-                </S.FormRadio>
-
-                <S.ButtonSubmit
-                    secundary
-                    disabled={loading}
-                    type="submit"
-                    {...buttonProps}
-                >
-                    {loading ? 'Enviando...' : <>Enviar</>}
-                </S.ButtonSubmit>
-            </S.Row> */}
-
-            {/* <LoadingButton
-                type="submit"
-                color="primary"
-                form="registerForm"
-                loading={loading}
-                variant="contained"
-                size="large"
-                fullWidth
+                ref={(el) => setFormRef(el)}
+                sx={{
+                    display: 'grid',
+                    gridTemplateColumns: { xs: '1fr', md: 'repeat(2, 1fr)' },
+                    gap: '20px',
+                    alignItems: 'flex-start',
+                    justifyContent: 'flex-start',
+                    transition: '.5s all',
+                    opacity: '1',
+                    width: '90%',
+                    mx: 0,
+                    mt: '20px',
+                }}
             >
-                Salvar
-            </LoadingButton> */}
+                <Box sx={{ display: 'none' }}>
+                    <ReCAPTCHA
+                        ref={recaptchaRef}
+                        size="invisible"
+                        sitekey={process.env.RECAPTCHA_SITE}
+                        onChange={onReCAPTCHAChange}
+                        onSubmit={handleSubmit}
+                        id="registerForm"
+                        validations={validations}
+                    />
+                </Box>
+                <InputText
+                    type="email"
+                    name="email"
+                    id="email"
+                    label="E-Mail*"
+                />
+                <InputPhone
+                    name="phone"
+                    id="phone"
+                    label="Telefone (com DDD)*"
+                />
+                <InputCep name="cep" id="cep" label="CEP*" />
+                <InputText type="text" name="nome" id="nome" label="Nome*" />
+                <InputSwitch
+                    name="permiteWhats"
+                    label=" Quero fazer parte do grupo Aliança Rebelde"
+                />
+                <LoadingButton
+                    type="submit"
+                    color="primary"
+                    form="registerForm"
+                    loading={loading}
+                    variant="contained"
+                    size="large"
+                    fullWidth
+                >
+                    Enviar
+                </LoadingButton>
 
-            {/* <S.ThankYouMessage visible={success}>
-                <span>
-                    Dados enviados com sucesso. Obrigado por se cadastrar!
-                </span>
-                <br />
-                {checked ? (
-                    <a
-                        href="https://growp.app/i/n8uwd"
-                        target="_blank"
-                        rel="noreferrer"
-                    >
-                        Não conseguiu acessar o grupo? Clique aqui!
-                    </a>
-                ) : (
-                    ''
-                )}
-            </S.ThankYouMessage> */}
-
-            {/* <GroupsModal
-                isOpen={isModalOpen && checked}
-                setIsOpen={setIsModalOpen}
-                group={group}
-            /> */}
-        </Form>
+                <GroupsModal
+                    open={isModalOpen && checked}
+                    setOpen={setIsModalOpen}
+                    group={group}
+                />
+            </Form>
+        </Box>
     )
 }
 

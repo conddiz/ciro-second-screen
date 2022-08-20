@@ -75,12 +75,14 @@ const AppCard = () => {
                     }
                     href="https://ciro.app.br"
                 >
-                    <Image
-                        src="/img/app-screenshot.png"
-                        alt="Screenshot do app do Cirão"
-                        height="280px"
-                        width="140px"
-                    ></Image>
+                    <a>
+                        <Image
+                            src="/img/app-screenshot.png"
+                            alt="Screenshot do app do Cirão"
+                            height="280px"
+                            width="140px"
+                        ></Image>
+                    </a>
                 </Link>
             </Box>
             <Box

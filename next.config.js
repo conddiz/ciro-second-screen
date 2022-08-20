@@ -14,6 +14,8 @@ const nextConfig = {
 
     env: {
         NEXT_PUBLIC_EMBED_DOMAIN: process.env.NEXT_PUBLIC_EMBED_DOMAIN,
+        RECAPTCHA_SITE: process.env.RECAPTCHA_SITE,
+        RECAPTCHA_SECRET: process.env.RECAPTCHA_SECRET,
     },
 }
 

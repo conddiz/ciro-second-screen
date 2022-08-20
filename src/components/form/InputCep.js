@@ -12,6 +12,52 @@ const MaskedTextField = IMaskMixin(
                 {...otherProps}
                 inputRef={inputRef}
                 value={defaultValue}
+                sx={{
+                    width: '100%',
+
+                    border: '2px solid',
+                    borderColor: 'tertiary.darker',
+                    backgroundColor: 'transparent',
+                    padding: 0,
+
+                    '& input': {
+                        padding: 0,
+                        margin: 0,
+                        color: 'tertiary.darker',
+                        fontFamily: 'Graphik',
+                        fontStyle: 'normal',
+                        fontWeight: '500',
+                        fontSize: '13px',
+                        padding: '15px 20px',
+                        outline: '0',
+                        transition: 'all .2s ease-in',
+                        lineHeight: '1.15',
+                        border: '0 !important',
+                        '&::placeholder': {
+                            textTransform: 'uppercase',
+                            color: 'tertiary.darker',
+                            opacity: '1',
+                        },
+                    },
+                    '& .MuiInputBase-root::before': {
+                        border: '0 !important',
+                    },
+                    '& .MuiInputBase-root::after': {
+                        border: '0 !important',
+                    },
+
+                    '& input + fieldset': {
+                        border: '0 !important',
+                    },
+
+                    '& input:hover, input:active, input:visited': {
+                        padding: '15px 20px',
+                        border: '0 !important',
+                    },
+                    '&:hover, &:focus': {
+                        backgroundColor: 'rgba(255, 255, 255, .065)',
+                    },
+                }}
             />
         )
     }
@@ -29,7 +75,7 @@ const MaskedField = ({
         <MaskedTextField
             id={name}
             name={name}
-            label={label}
+            placeholder={label}
             value={value}
             error={error}
             variant="filled"

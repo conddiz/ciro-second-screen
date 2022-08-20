@@ -69,15 +69,32 @@ const Theme = createTheme({
     },
 })
 
+Theme.components.MuiButton = {
+    styleOverrides: {
+        root: {
+            fontFamily: 'New Grotesk Square',
+            width: '100%',
+            maxWidth: '100%',
+            justifyContent: 'center',
+            background: '#00F07D',
+            borderRadius: '1px',
+            color: '#0F237C',
+            border: '1px solid #0F237C',
+            fontSize: '24px',
+            py: '8px',
+        },
+    },
+}
+
 Theme.typography.title = {
     display: 'flex',
     fontFamily: Theme.fonts.title,
-    backgroundColor: Theme.palette.primary.main,
+    backgroundColor: Theme.palette.primary.lighter,
     color: Theme.palette.tertiary.darker,
     display: 'inline-block',
     padding: '10px',
     fontWeight: '300',
-    fontSize: '24px',
+    fontSize: '30px',
 }
 
 export { Theme }

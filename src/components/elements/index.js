@@ -1,3 +1,4 @@
 export { AppCard } from './AppCard'
-export { JoinForm } from './JoinForm'
 export { SocialLinksSection } from './SocialLinksSection'
+export { JoinForm } from './JoinForm'
+// export { GroupsModal } from './GroupsModal'

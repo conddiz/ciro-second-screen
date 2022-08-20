@@ -8,22 +8,22 @@ const Form = ({
     onSubmit,
     defaultValues = {},
     validations = null,
-
     sx,
     ...props
 }) => {
-    const { register, handleSubmit, formState, control, watch, setValue } = useForm({
-        criteriaMode: 'all',
-        mode: 'onChange',
-        defaultValues: defaultValues,
-        resolver: yupResolver(validations),
-    })
+    const { register, handleSubmit, formState, control, watch, setValue } =
+        useForm({
+            criteriaMode: 'all',
+            mode: 'onChange',
+            defaultValues: defaultValues,
+            resolver: yupResolver(validations),
+        })
 
     const formProps = {
         register: register,
         formState: formState,
         control: control,
-        setValue: setValue
+        setValue: setValue,
     }
 
     return (
@@ -32,7 +32,6 @@ const Form = ({
                 width: '100%',
                 margin: '0 auto',
                 display: 'block',
-                // padding: '10px',
                 ...sx,
             }}
             noValidate

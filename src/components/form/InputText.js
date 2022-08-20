@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { TextField, InputAdornment, Input } from '@mui/material'
+import InputUnstyled from '@mui/base/InputUnstyled'
 
 import { Help } from '@ciro/components/elements'
 import { FormControl, FormErrors } from '@ciro/components/form'
@@ -12,56 +13,69 @@ const InputText = ({
     register,
     validation = {},
     formState,
-    helperText,
-    help,
     ...props
 }) => {
     const errors = formState.errors
 
     return (
         <FormControl>
-            <Input
+            <TextField
                 type={type}
                 name={name}
                 placeholder={label}
                 {...register(name, validation)}
                 {...props}
-                // variant="outlined"
-                color="primary"
+                variant="outlined"
                 error={errors[name] !== undefined}
-                helperText={helperText}
-                InputProps={{
-                    endAdornment: help ? (
-                        <InputAdornment position="end">
-                            <Help>{help}</Help>
-                        </InputAdornment>
-                    ) : null,
-                }}
                 sx={{
                     width: '100%',
-                    fontFamily: 'Graphik',
-                    fontStyle: 'normal',
-                    fontWeight: '500',
-                    fontSize: '13px',
-                    color: '#0F237C',
-                    border: '2px solid #0F237C',
-                    backgroundColor: 'transparent',
-                    padding: '15px 20px',
-                    outline: '0',
-                    transition: 'all .2s ease-in',
 
-                    '&:hover, &:focus': {
-                        backgroundColor: 'rgba(255, 255, 255, .065)',
+                    border: '2px solid',
+                    borderColor: 'tertiary.darker',
+                    backgroundColor: 'transparent',
+                    padding: 0,
+
+                    '& input': {
+                        padding: 0,
+                        margin: 0,
+                        color: 'tertiary.darker',
+                        fontFamily: 'Graphik',
+                        fontStyle: 'normal',
+                        fontWeight: '500',
+                        fontSize: '13px',
+                        padding: '15px 20px',
+                        outline: '0',
+                        transition: 'all .2s ease-in',
+                        lineHeight: '1.15',
+                        border: 0,
+
+                        '&::placeholder': {
+                            textTransform: 'uppercase',
+                            color: 'tertiary.darker',
+                            opacity: '1',
+                        },
+                    },
+                    '& .Mui-focused .MuiOutlinedInput-notchedOutline': {
+                        border: '0 !important',
                     },
 
-                    '&::placeholder': {
-                        textTransform: 'uppercase',
-                        color: '#0F237C',
+                    '& input + fieldset': {
+                        border: '0 !important',
+                    },
+
+                    '& input:hover, input:active, input:visited': {
+                        padding: '15px 20px',
+                        border: '0 !important',
+                    },
+                    '&:hover, &:focus': {
+                        backgroundColor: 'rgba(255, 255, 255, .065)',
+                        border: '2px solid',
+                        borderColor: 'tertiary.darker',
                     },
                 }}
             >
                 {children}
-            </Input>
+            </TextField>
 
             <FormErrors name={name} errors={errors} label={label} />
         </FormControl>

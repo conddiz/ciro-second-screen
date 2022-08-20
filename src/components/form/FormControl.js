@@ -8,7 +8,6 @@ const FormControl = ({ children, ...props }) => {
                 margin: '0 auto',
                 display: 'flex',
                 flexDirection: 'column',
-                py: '10px',
             }}
         >
             {children}

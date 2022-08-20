@@ -1,8 +1,25 @@
 import { useState } from 'react'
-
-import Image from 'next/image'
 import * as yup from 'yup'
-import { Box } from '@mui/material'
+import ReCAPTCHA from 'react-google-recaptcha'
+import _ from 'lodash'
+import TagManager from 'react-gtm-module'
+
+// import * as S from './JoinForm.styles'
+// import { GroupsModal } from '@ciro/components/elements'
+
+import { CEP_MASK, PHONE_MASK } from '@ciro/constants'
+
+import {
+    Alert,
+    Box,
+    Button,
+    Container,
+    Card,
+    CardContent,
+    CardActions,
+    Typography,
+} from '@mui/material'
+import LoadingButton from '@mui/lab/LoadingButton'
 
 import {
     Form,
@@ -12,30 +29,110 @@ import {
     InputCep,
     InputSwitch,
 } from '@ciro/components/form'
+import { isValidPhoneNumber } from 'mui-tel-input'
 
 const JoinForm = () => {
     const [loading, setLoading] = useState(false)
     const [message, setMessage] = useState()
+    // const [event, setFormEvent] = React.useState({})
+    // const [formRef, setFormRef] = React.useState({})
+    // const [loading, setLoading] = React.useState(false)
+    // const [success, setSuccess] = React.useState(false)
+    // const [isModalOpen, setIsModalOpen] = React.useState(false)
+    // const [group, setGroup] = React.useState(null)
+
+    // const [cep, setCep] = React.useState('')
+    // const [phone, setPhone] = React.useState('')
+    // const [checked, setChecked] = React.useState(false)
+
+    // const recaptchaRef = React.createRef()
+
+    // const captchaReset = () => {
+    //     if (window.grecaptcha) grecaptcha.reset()
+    // }
+
+    // const onReCAPTCHAChange = async (captchaCode) => {
+    //     const email = event.target.email.value
+    //     const nome = event.target.nome.value
+    //     const permissaoWhats = event.target.permite.checked
+
+    //     if (!captchaCode) {
+    //         console.log('no recaptcha code')
+    //         return
+    //     }
+    //     try {
+    //         let response = await fetch('/api/save-lead', {
+    //             method: 'POST',
+    //             body: JSON.stringify({
+    //                 email,
+    //                 nome,
+    //                 phone,
+    //                 cep,
+    //                 captcha: captchaCode,
+    //                 permiteWhats: permissaoWhats,
+    //             }),
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //             },
+    //         })
+    //         if (response.ok) {
+    //             setSuccess(true)
+
+    //             response = await response.json()
+
+    //             if (permissaoWhats) {
+    //                 setGroup(response.group)
+    //                 setIsModalOpen(true)
+    //             }
+
+    //             setTimeout(() => {
+    //                 setSuccess(false)
+    //             }, 15000)
+    //             setFormEvent({})
+    //         } else {
+    //             const error = await response.json()
+    //             throw new Error(error.message)
+    //         }
+    //     } catch (error) {
+    //         alert(error?.message || 'Something went wrong')
+    //     } finally {
+    //         captchaReset()
+    //         setFormEvent({})
+    //         setLoading(false)
+    //     }
+    // }
+
+    const handleSubmit = (event) => {
+        setLoading(true)
+        event.preventDefault()
+        setFormEvent(event)
+
+        const data = {
+            email: event.target.email.value,
+            nome: event.target.nome.value,
+            phone: event.target.tel.value,
+            cep: event.target.cep.value,
+            permiteWhats: event.target.permite.checked,
+        }
+        TagManager.dataLayer({
+            dataLayer: {
+                event: 'sign_up_leads',
+                data: data,
+            },
+        })
+
+        // Execute the reCAPTCHA when the form is submitted
+        recaptchaRef.current
+            .execute()
+            .then(() => {
+                if (recaptchaRef.current) recaptchaRef.current.reset()
+            })
+            .catch(console.error)
+    }
 
     const validations = yup.object({
-        fullname: yup
-            .string()
-            .required('O campo "Nome completo" é obrigatório'),
-        username: yup
-            .string()
-            .required('O campo "Nome de usuário" é obrigatório')
-            .min(3, 'O campo "Nome de usuário" deve ter no mínimo 3 caracteres')
-            .max(
-                20,
-                'O campo "Nome de usuário" deve ter no máximo 20 caracteres'
-            )
-            .test(
-                'username-no-space',
-                'O campo "Nome de usuário" não pode conter espaços',
-                (value) => {
-                    return !value.includes(' ')
-                }
-            ),
+        fullname: yup.string().required('O campo "Nome" é obrigatório'),
+
         email: yup
             .string()
             .required('O campo "Email" é obrigatório')
@@ -52,6 +149,7 @@ const JoinForm = () => {
             ),
         cep: yup
             .string()
+            .required('O campo "CEP" é obrigatório')
             .matches(/[0-9]{5}-[0-9]{3}/i, {
                 message: 'CEP inválido',
                 excludeEmptyString: true,
@@ -67,109 +165,158 @@ const JoinForm = () => {
                     return true
                 }
             ),
-        referral: yup
-            .string()
-            .test(
-                'username-no-space',
-                'O campo "Indicação" não pode conter espaços',
-                (value) => {
-                    return !value.includes(' ')
-                }
-            )
-            .test(
-                'referral-null-or-min',
-                'O campo Indicação deve ter entre 3 e 20 caracteres',
-                (value) => {
-                    return (
-                        value == null ||
-                        value.length === 0 ||
-                        (value.length >= 3 && value.length <= 20)
-                    )
-                }
-            ),
-        password: yup
-            .string()
-            .required('O campo "Senha" é obrigatório')
-            .min(6, 'A senha deve ter ao menos 6 caracteres'),
-        confirmPassword: yup
-            .string()
-            .required('O campo "Confirmar senha" é obrigatório')
-            .oneOf(
-                [yup.ref('password')],
-                'As senhas informadas não são iguais '
-            ),
     })
 
-    const handleOnSubmit = async (data) => {
-        setLoading(true)
-
-        const userData = {
-            username: data.username,
-            email: data.email,
-            password: data.password,
-            fullname: data.fullname,
-            phone: data.phone,
-            cep: data.cep,
-            referral: data.referral,
-            allowGroup: data.allowGroup,
-        }
-
-        try {
-            const result = await register(userData)
-
-            setMessage({
-                text: `Usuário ${result.data.user.username} cadastrado com sucesso`,
-                level: 'success',
-            })
-
-            await router.push('/perfil')
-        } catch (error) {
-            if (error.response?.data?.error?.name === 'ValidationError') {
-                setMessage({
-                    text: 'Não é possível cadastrar esse usuário',
-                    level: 'error',
-                })
-            } else {
-                setMessage({
-                    text: 'Ocorreu um erro ao cadastrar esse usuário. Tente novamente mais tarde.',
-                    level: 'error',
-                })
-            }
-        } finally {
-            setLoading(false)
-        }
-    }
-
     return (
-        <Box
+        <Form
+            action="/api/save-lead"
+            method="POST"
+            onSubmit={handleSubmit}
+            id="registerForm"
+            validations={validations}
+            // ref={(el) => setFormRef(el)}
             sx={{
-                marginTop: '40px',
-                marginBottom: '40px',
+                display: 'grid',
+                gridTemplateColumns: { xs: '1fr', md: 'repeat(2, 1fr)' },
+                gap: '20px',
+                alignItems: 'flex-start',
+                justifyContent: 'flex-start',
+                transition: '.5s all',
+                opacity: '1',
                 width: '90%',
-                position: 'relative',
+                mx: 0,
+                mt: '20px',
             }}
         >
-            <Form
-                action="/api/save-lead"
-                method="POST"
+            {message && (
+                <Alert
+                    severity={message.level}
+                    onClose={() => {
+                        setMessage(null)
+                    }}
+                >
+                    {message.text}
+                </Alert>
+            )}
+            {/* <ReCAPTCHA
+                ref={recaptchaRef}
+                size="invisible"
+                sitekey={process.env.RECAPTCHA_SITE}
+                onChange={onReCAPTCHAChange}
                 onSubmit={handleOnSubmit}
-            >
-                <InputText type="email" name="email" id="email" label="Email" />
+                id="registerForm"
+                validations={validations}
+            /> */}
+            <InputText type="email" name="email" id="email" label="E-Mail*" />
+            <InputPhone name="phone" id="phone" label="Telefone (com DDD)*" />
+            <InputCep name="cep" id="cep" label="CEP*" />
+            <InputText
+                type="text"
+                name="fullname"
+                id="fullname"
+                label="Nome*"
+            />
 
-                <InputPhone name="phone" id="phone" label="Telefone" />
-                <InputCep name="cep" id="cep" label="CEP" />
+            <InputSwitch
+                name="allowGroup"
+                label=" Quero fazer parte do grupo Aliança Rebelde"
+            />
+
+            <Button variant="contained" color="primary">
+                Enviar
+            </Button>
+
+            {/* <S.Row visible={!success}>
                 <InputText
+                    name="email"
+                    type="email"
+                    placeholder="*E-mail"
+                    required
+                />
+
+                <InputText
+                    name="tel"
                     type="text"
-                    name="fullname"
-                    id="fullname"
-                    label="Nome completo"
+                    value={phone}
+                    onChange={(e) => setPhone(PHONE_MASK(e.target.value))}
+                    placeholder="Telefone (com DDD)*"
+                    maxLength={15}
+                    required
                 />
-                <InputSwitch
-                    name="allowGroup"
-                    label=" Quero fazer parte do grupo Aliança Rebelde"
+                <InputText
+                    name="cep"
+                    type="text"
+                    value={cep}
+                    onChange={(e) => setCep(CEP_MASK(e.target.value))}
+                    placeholder="*CEP"
+                    required
                 />
-            </Form>
-        </Box>
+                <InputText name="nome" type="text" placeholder="Nome" />
+                <S.FormRadio>
+                    <span
+                        style={{
+                            color: '#0F237C',
+                            fontWeight: 700,
+                            fontFamily: 'Graphik',
+                        }}
+                    >
+                        Quero fazer parte do grupo Aliança Rebelde
+                    </span>
+                    <input
+                        type="checkbox"
+                        name="permite"
+                        defaultChecked={checked}
+                        onChange={() => setChecked(!checked)}
+                    />
+                    <span className="checkmark"></span>
+                </S.FormRadio>
+
+                <S.ButtonSubmit
+                    secundary
+                    disabled={loading}
+                    type="submit"
+                    {...buttonProps}
+                >
+                    {loading ? 'Enviando...' : <>Enviar</>}
+                </S.ButtonSubmit>
+            </S.Row> */}
+
+            {/* <LoadingButton
+                type="submit"
+                color="primary"
+                form="registerForm"
+                loading={loading}
+                variant="contained"
+                size="large"
+                fullWidth
+            >
+                Salvar
+            </LoadingButton> */}
+
+            {/* <S.ThankYouMessage visible={success}>
+                <span>
+                    Dados enviados com sucesso. Obrigado por se cadastrar!
+                </span>
+                <br />
+                {checked ? (
+                    <a
+                        href="https://growp.app/i/n8uwd"
+                        target="_blank"
+                        rel="noreferrer"
+                    >
+                        Não conseguiu acessar o grupo? Clique aqui!
+                    </a>
+                ) : (
+                    ''
+                )}
+            </S.ThankYouMessage> */}
+
+            {/* <GroupsModal
+                isOpen={isModalOpen && checked}
+                setIsOpen={setIsModalOpen}
+                group={group}
+            /> */}
+        </Form>
     )
 }
 

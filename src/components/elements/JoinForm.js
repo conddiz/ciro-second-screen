@@ -67,7 +67,7 @@ const JoinForm = () => {
             return
         }
         try {
-            let response = await fetch('http://localhost:3001/api/save-lead', {
+            let response = await fetch('/api/save-lead', {
                 method: 'POST',
                 body: JSON.stringify({
                     email,
@@ -78,6 +78,7 @@ const JoinForm = () => {
                     permiteWhats: permiteWhats,
                 }),
                 headers: {
+                    mode: 'no-cors',
                     'Content-Type': 'application/json',
                 },
             })

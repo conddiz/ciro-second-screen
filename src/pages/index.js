@@ -29,14 +29,20 @@ const Home = ({ config }) => {
 
     return (
         <>
-            {config.mode === SYSTEM_MODE.PADRAO.id && <DefaultMode />}
+            {config.mode === SYSTEM_MODE.PADRAO.id && (
+                <DefaultMode config={config} />
+            )}
 
-            {config.mode === SYSTEM_MODE.COBERTURA.id && <CoverageMode />}
+            {config.mode === SYSTEM_MODE.COBERTURA.id && (
+                <CoverageMode config={config} />
+            )}
 
-            {config.mode === SYSTEM_MODE.DEBATE.id && <DebateMode />}
+            {config.mode === SYSTEM_MODE.DEBATE.id && (
+                <DebateMode config={config} />
+            )}
 
             {config.mode === SYSTEM_MODE.HORARIO_ELEITORAL.id && (
-                <PoliticalAdvertisingTimeMode />
+                <PoliticalAdvertisingTimeMode config={config} />
             )}
         </>
     )

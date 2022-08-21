@@ -3,17 +3,32 @@ import React from 'react'
 import { Box } from '@mui/material'
 import { Header, Footer } from '@ciro/components/templates'
 
-import { JoinUsSection } from '@ciro/components/templates'
+import { JoinUsSection, SocialMediaSection } from '@ciro/components/templates'
 
 const Layout = ({ children }) => {
     return (
-        <Box>
+        <Box
+            sx={{
+                display: 'flex',
+                padding: '0px',
+                paddingLeft: '90px',
+                flexDirection: 'column',
+                gap: 0,
+                bgcolor: 'tertiary.darker',
+            }}
+        >
             <Header />
-            <main>
+            <Box
+                component="main"
+                sx={{
+                    bgcolor: 'neutral.lighter',
+                }}
+            >
                 <Box>{children}</Box>
                 <JoinUsSection />
-            </main>
-            <Footer />
+                <SocialMediaSection />
+                <Footer />
+            </Box>
         </Box>
     )
 }

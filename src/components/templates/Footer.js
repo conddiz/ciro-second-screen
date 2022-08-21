@@ -7,7 +7,7 @@ import { Box, Container } from '@mui/material'
 const Footer = () => {
     return (
         <Box
-            component="header"
+            component="footer"
             sx={{
                 display: 'flex',
                 bgcolor: 'neutral.lighter',

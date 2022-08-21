@@ -1,6 +1,7 @@
 {
   "name": "Ciro TV",
   "short_name": "Ciro TV",
+  "description": "Aqui, você vai encontrar tudo sobre Ciro: propostas, biografia, trajetória política, além de vídeos, clipes e artigos. Seja muito bem-vindo.",
   "theme_color": "#ffffff",
   "background_color": "#004740",
   "display": "fullscreen",

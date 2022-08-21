@@ -1,0 +1,1 @@
+export { getCiroTvConfig } from './CiroTvApi'

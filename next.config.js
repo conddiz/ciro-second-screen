@@ -22,6 +22,8 @@ const nextConfig = {
         AWS_REGION: process.env.CLOUD_AWS_REGION,
         S3_KEY: process.env.CLOUD_AWS_ACCESS_KEY_ID,
         S3_SECRET: process.env.CLOUD_AWS_SECRET_ACCESS_KEY,
+
+        STATIC_PAGES_TTL: process.env.STATIC_PAGES_TTL,
     },
 }
 

@@ -42,7 +42,7 @@ export const SOCIAL = [
     {
         id: 'whatsapp',
         url: 'https://api.whatsapp.com/send?text=',
-        text: 'https://cirogomes.com.br/#rebeldia',
+        text: 'https://cirotv.com.br',
         src: '/icons/whatsapp.svg',
         target: '_blank',
         rel: 'noopener noreferrer',

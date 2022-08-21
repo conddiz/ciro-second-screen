@@ -24,7 +24,7 @@ const Layout = ({ children }) => {
                     bgcolor: 'neutral.lighter',
                 }}
             >
-                <Box>{children}</Box>
+                <>{children}</>
                 <JoinUsSection />
                 <SocialMediaSection />
                 <Footer />

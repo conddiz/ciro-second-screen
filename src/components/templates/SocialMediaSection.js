@@ -5,6 +5,7 @@ import { Box } from '@mui/material'
 const SocialMediaSection = ({ children }) => {
     return (
         <Box
+            component="section"
             sx={{
                 display: 'flex',
                 bgcolor: 'tertiary.darker',

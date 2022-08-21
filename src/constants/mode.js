@@ -1,8 +1,8 @@
 const SYSTEM_MODE = {
-    PADRAO: 'Padrão',
-    COBERTURA: 'Cobertura',
-    DEBATE: 'Debate',
-    HORARIO_ELEITORAL: 'Horário Eleitoral',
+    PADRAO: { id: 'padrao', label: 'Padrão' },
+    COBERTURA: { id: 'cobertura', label: 'Cobertura' },
+    DEBATE: { id: 'debate', label: 'Debate' },
+    HORARIO_ELEITORAL: { id: 'horario_eleitoral', label: 'Horário Eleitoral' },
 }
 
 export { SYSTEM_MODE }

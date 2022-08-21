@@ -22,10 +22,7 @@ const getStaticProps = async ({ params }) => {
 }
 
 const Home = ({ config }) => {
-    const videoId = 'FP9I_07p2dY'
     console.log('config', config)
-
-    const [mode, setMode] = useState('Horário Eleitoral')
 
     return (
         <>

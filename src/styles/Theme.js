@@ -2,7 +2,7 @@ import { createTheme } from '@mui/material/styles'
 import { blue, amber, grey } from '@mui/material/colors'
 import {
     fontMontserrat,
-    fontSquadOne,
+    fontSquadaOne,
     fontNewGroteskSquare,
     fontGraphik,
 } from './fonts'
@@ -61,7 +61,7 @@ const Theme = createTheme({
         MuiCssBaseline: {
             styleOverrides: `
             ${fontMontserrat}
-            ${fontSquadOne}
+            ${fontSquadaOne}
             ${fontNewGroteskSquare}
             ${fontGraphik}
             `,

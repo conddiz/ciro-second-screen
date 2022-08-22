@@ -65,22 +65,22 @@ const AppCard = () => {
                     justifyContent: 'center',
                 }}
             >
-                <Link
-                    onClick={() =>
-                        TagManager.dataLayer({
-                            dataLayer: {
-                                event: 'click_site_to_app',
-                            },
-                        })
-                    }
-                    href="https://ciro.app.br"
-                >
-                    <a>
+                <Link href="https://ciro.app.br">
+                    <a
+                        onClick={() =>
+                            TagManager.dataLayer({
+                                dataLayer: {
+                                    event: 'click_site_to_app',
+                                },
+                            })
+                        }
+                    >
                         <Image
                             src="/img/app-screenshot.png"
                             alt="Screenshot do app do Cirão"
                             height="280px"
                             width="140px"
+                            priority
                         ></Image>
                     </a>
                 </Link>

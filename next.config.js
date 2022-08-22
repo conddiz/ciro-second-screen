@@ -15,6 +15,7 @@ const nextConfig = {
     env: {
         NEXT_PUBLIC_EMBED_DOMAIN: process.env.NEXT_PUBLIC_EMBED_DOMAIN,
         NEXT_PUBLIC_API_BACKEND_URL: process.env.NEXT_PUBLIC_API_BACKEND_URL,
+        NEXT_PUBLIC_API_FRONTEND_URL: process.env.NEXT_PUBLIC_API_FRONTEND_URL,
         RECAPTCHA_SITE: process.env.RECAPTCHA_SITE,
         RECAPTCHA_SECRET: process.env.RECAPTCHA_SECRET,
 
@@ -24,6 +25,10 @@ const nextConfig = {
         S3_SECRET: process.env.CLOUD_AWS_SECRET_ACCESS_KEY,
 
         STATIC_PAGES_TTL: process.env.STATIC_PAGES_TTL,
+        YOUTUBE_API_KEY: process.env.YOUTUBE_API_KEY,
+    },
+    images: {
+        domains: ['i.ytimg.com'],
     },
 }
 

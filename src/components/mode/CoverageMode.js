@@ -4,7 +4,7 @@ import { Box } from '@mui/material'
 
 import { SYSTEM_MODE } from '@ciro/constants'
 
-const CoverageMode = () => {
+const CoverageMode = ({ config }) => {
     return <Box component="section">COBERTURA</Box>
 }
 

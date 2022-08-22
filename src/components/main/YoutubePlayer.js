@@ -6,6 +6,7 @@ const YoutubePlayer = ({ videoId }) => {
     return (
         <Box
             sx={{
+                flex: 'auto',
                 position: 'relative',
                 pb: '56.25%',
                 height: '0',

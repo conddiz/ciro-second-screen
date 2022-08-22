@@ -8,7 +8,6 @@ import { S3Controller } from '@ciro/lib'
 
 const saveLeadToS3 = async (lead, req) => {
     const formatDate = 'yyyy-MM-dd HH:mm:ss'
-    console.log(req)
     const s3Controller = new S3Controller()
 
     const { rawHeaders, httpVersion, method, url } = req
@@ -62,8 +61,6 @@ const findGroup = async (IBGE) => {
         params,
         paramsSerializer: (p) => qs.stringify(p),
     })
-
-    console.log(data)
 
     if (data.data.length > 0 && data.data[0].grupo) {
         return data.data[0].grupo
@@ -262,9 +259,7 @@ export default async function handler(req, res) {
 
             let group = null
             if (permiteWhats) {
-                console.log('entrou permitwhats')
                 const IBGE = await getIBGEFromViaCep(cep)
-                console.log(IBGE)
                 group = await findGroup(IBGE)
             }
 

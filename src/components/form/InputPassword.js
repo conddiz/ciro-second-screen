@@ -25,7 +25,6 @@ const InputPassword = ({
     const [showPassword, setShowPassword] = useState(false)
 
     const handleClickShowPassword = () => {
-        console.log('handleClickShowPassword', showPassword)
         setShowPassword(!showPassword)
     }
 

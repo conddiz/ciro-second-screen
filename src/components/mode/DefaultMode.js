@@ -9,7 +9,6 @@ import { LoadingProgress } from '@ciro/components/elements'
 import { getYoutubePlaylist } from '@ciro/api'
 
 const DefaultMode = ({ config }) => {
-    console.log(config)
     const [loading, setLoading] = useState(true)
     const [playlist, setPlaylist] = useState(config.playlist)
     const [videoId, setVideoId] = useState(null)
@@ -20,7 +19,6 @@ const DefaultMode = ({ config }) => {
             const playlist = JSON.parse(data.youtubePlaylistJson)
             const videoId = playlist.items[0].snippet.resourceId.videoId
 
-            console.log('PLAYLIST', playlist)
             setPlaylist(playlist)
             setVideoId(videoId)
             setLoading(false)

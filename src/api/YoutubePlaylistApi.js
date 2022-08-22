@@ -6,7 +6,6 @@ const getYoutubePlaylist = async () => {
         url: `${process.env.NEXT_PUBLIC_API_FRONTEND_URL}/playlist/`,
     })
 
-    console.log(data)
     return data
 }
 

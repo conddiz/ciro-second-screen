@@ -22,8 +22,6 @@ const getStaticProps = async ({ params }) => {
 }
 
 const Home = ({ config }) => {
-    console.log('config', config)
-
     return (
         <>
             {config.mode === SYSTEM_MODE.PADRAO.id && (

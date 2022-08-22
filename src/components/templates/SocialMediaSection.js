@@ -40,8 +40,11 @@ const SocialMediaSection = ({ children }) => {
                     }
                 },
                 ul: {
+                    maxWidth: '737px',
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
                     margin: '-70px 0 0 -34px',
-                    display: 'flex',
+                    display: 'inline-flex',
                     alignItems: 'flex-start',
                     justifyContent: 'center',
                     columnGap: '20px',

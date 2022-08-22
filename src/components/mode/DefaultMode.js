@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 
-import { Box } from '@mui/material'
-
+import { Box, Container } from '@mui/material'
+import Grid from '@mui/material/Unstable_Grid2'
 import { YoutubePlayer } from '@ciro/components/main'
 import { YoutubePlaylist } from '@ciro/components/aside'
 import { LoadingProgress } from '@ciro/components/elements'
@@ -27,49 +27,45 @@ const DefaultMode = ({ config }) => {
     }, [])
 
     return (
-        <Box
-            id={config.id}
-            sx={{
-                width: '100%',
-                display: 'flex',
-                flexDirection: { sm: 'column', md: 'row' },
-                position: 'relative',
-            }}
-            component="section"
-        >
-            <LoadingProgress loading={loading} />
-
-            {!loading && playlist && (
-                <>
-                    <Box
-                        sx={{
-                            flexGrow: '1',
-                            flex: '0 0 75%',
-                        }}
-                    >
-                        <YoutubePlayer videoId={videoId} />
-                    </Box>
-                    <Box
-                        sx={{
-                            flexGrow: { sm: '1', md: '0' },
-                            flex: { sm: '1', md: '0 0 25%' },
-                            px: { sm: '10px', md: '10px' },
-                            position: { sm: 'relative', md: 'absolute' },
-                            left: { sm: 'auto', md: '80%' },
-                            top: { sm: 'auto', md: '0' },
-                            bottom: { sm: 'auto', md: '0' },
-                            right: { sm: 'auto', md: '0' },
-                            overflow: { sm: 'auto', md: 'auto' },
-                        }}
-                    >
-                        <YoutubePlaylist
-                            playlist={playlist}
-                            setVideoId={setVideoId}
-                        />
-                    </Box>
-                </>
-            )}
-        </Box>
+        <Container>
+            <Box
+                id={config.id}
+                sx={{
+                    flexGrow: 1,                
+                }}
+                component="section"
+            >
+                <Grid container spacing={1}>                
+                        <LoadingProgress loading={loading} />
+                        {!loading && playlist && (
+                            <>
+                                <Grid xs={12} md={8}>
+                                    <Box
+                                        sx={{
+                                                                                
+                                        }}
+                                    >
+                                        <YoutubePlayer videoId={videoId} />
+                                    </Box>
+                                </Grid>
+                                <Grid xs={12} md={4}>
+                                    <Box                        
+                                        sx={{                           
+                                            maxHeight: '434px',
+                                            overflow: 'scroll',
+                                        }}
+                                    >
+                                        <YoutubePlaylist
+                                            playlist={playlist}
+                                            setVideoId={setVideoId}
+                                        />
+                                    </Box>
+                                </Grid>
+                            </>
+                        )}                
+                </Grid>
+            </Box>
+        </Container>
     )
 }
 

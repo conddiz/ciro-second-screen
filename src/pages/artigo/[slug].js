@@ -56,6 +56,9 @@ const PaginaArtigo = ({ article, articles, error }) => {
 
     return (
         <Container sx={{}}>
+            <Typography variant="articleTitle" component="h1" sx={{ mb: 0 }}>
+                {article.title}
+            </Typography>
             <Box
                 sx={{
                     display: 'flex',
@@ -75,14 +78,11 @@ const PaginaArtigo = ({ article, articles, error }) => {
                         display: 'flex',
                         flexDirection: 'column',
 
-                        pt: '60px',
+                        pt: '20px',
                         pb: { md: '20px', lg: '80px' },
                         width: { md: '100%', lg: '70%' },
                     }}
                 >
-                    <Typography variant="articleTitle" component="h1">
-                        {article.title}
-                    </Typography>
                     <Typography variant="articleDate" component="div">
                         Publicado em{' '}
                         {new Date(article.createdAt).toLocaleDateString()} |
@@ -103,7 +103,7 @@ const PaginaArtigo = ({ article, articles, error }) => {
                         flexDirection: 'column',
                         width: { md: '100%', lg: '30%' },
                         backgroundColor: { md: '', lg: 'neutral.light' },
-                        py: { md: '20px', lg: '60px' },
+                        py: '20px',
                         px: { md: '0px', lg: '20px' },
                         overflowY: {
                             md: 'initial',
@@ -112,14 +112,6 @@ const PaginaArtigo = ({ article, articles, error }) => {
                     }}
                     component="aside"
                 >
-                    <Typography
-                        variant="articleTitle"
-                        component="h1"
-                        backgroundColor="secondary.main"
-                    >
-                        Artigos relacionados
-                    </Typography>
-
                     <Box
                         sx={{
                             flexBasis: { md: '', lg: '0px' },
@@ -133,6 +125,14 @@ const PaginaArtigo = ({ article, articles, error }) => {
                             flexDirection: 'column',
                         }}
                     >
+                        <Typography
+                            variant="articleTitle"
+                            component="h1"
+                            backgroundColor="secondary.main"
+                        >
+                            Artigos relacionados
+                        </Typography>
+
                         {articles.map((article) => {
                             return (
                                 <Box key={article.id}>

@@ -1,6 +1,7 @@
 import React from 'react'
 
 import Image from 'next/image'
+import Link from 'next/link'
 
 import { Box } from '@mui/material'
 
@@ -19,12 +20,16 @@ const Header = ({ children }) => {
             }}
         >
             <Box></Box>
-            <Image
-                src="/img/logo-prefiro-ciro-ana-paula.png"
-                alt="Logo"
-                width="180px"
-                height="58px"
-            />
+            <Link href="/">
+                <a>
+                    <Image
+                        src="/img/logo-prefiro-ciro-ana-paula.png"
+                        alt="Logo"
+                        width="180px"
+                        height="58px"
+                    />
+                </a>
+            </Link>
             <Box></Box>
         </Box>
     )

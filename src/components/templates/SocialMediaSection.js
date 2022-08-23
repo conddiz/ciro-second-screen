@@ -28,9 +28,9 @@ const SocialMediaSection = ({ children }) => {
                         display: 'flex',
 
                         flexDirection: {
-                            xs: 'column-reverse',
-                            sm: 'column-reverse',
-                            md: 'column-reverse',
+                            xs: 'column',
+                            sm: 'column',
+                            md: 'column',
                             lg: 'row',
                             xl: 'row',
                         },
@@ -72,13 +72,21 @@ const SocialMediaSection = ({ children }) => {
                                 xs: '100%',
                                 sm: '100%',
                                 md: '100%',
-                                lg: '60%',
-                                xl: '60%',
+                                lg: '70%',
+                                xl: '70%',
                             },
                         }}
                     >
-                        <Box>
-                            <Typography variant="colorful">
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                justifyContent: 'center',
+                                width: '100%',
+                                wordWrap: 'break-word',
+                            }}
+                        >
+                            <Typography variant="colorful" component="div">
                                 VEM <span>PRA</span> <span>TURMA</span>{' '}
                                 <span>BOA</span>
                             </Typography>
@@ -158,11 +166,11 @@ const SocialMediaSection = ({ children }) => {
                                 xl: '0',
                             },
                             width: {
-                                xs: '40%',
-                                sm: '40%',
-                                md: '60%',
-                                lg: '80%',
-                                xl: '100%',
+                                xs: '100%',
+                                sm: '100%',
+                                md: '100%',
+                                lg: '30%',
+                                xl: '30%',
                             },
                             // position: 'relative',
                         }}

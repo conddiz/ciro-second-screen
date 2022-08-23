@@ -158,20 +158,20 @@ Theme.typography.articleDate = {
 }
 
 Theme.typography.colorful = {
-    display: 'inline-flex',
+    display: 'block',
     gap: '10px',
     background:
         'linear-gradient(to right, #FF9D00, #FF9D00, #49BA27, #49BA27, #0096ED, #0096ED, #0096ED)',
     WebkitBackgroundClip: 'text',
     WebkitTextFillColor: 'transparent',
     fontFamily: 'New Grotesk Square',
-
-    fontSize: '30px',
+    wordSpacing: '6px',
+    fontSize: '50px',
     [Theme.breakpoints.up('sm')]: {
-        fontSize: '55px',
+        fontSize: '60px',
     },
     [Theme.breakpoints.up('md')]: {
-        fontSize: '63px',
+        fontSize: '70px',
     },
     [Theme.breakpoints.up('lg')]: {
         fontSize: '83px',

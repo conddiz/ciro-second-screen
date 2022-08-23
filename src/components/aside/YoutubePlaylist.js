@@ -18,11 +18,11 @@ const YoutubePlaylist = ({ playlist, setVideoId }) => {
                     <ListItem
                         key={item.snippet.resourceId.videoId}
                         sx={{
-                            px: '0px',
-                            py: '0px',
+                            padding: '0px',
+                            mb: '15px',
                             display: 'flex',
-                            alignItems: 'flex-start',
-                            justifyItems: 'flex-start',
+                            // alignItems: 'flex-start',
+                            // justifyItems: 'flex-start',
                             flexDirection: { sm: 'row', md: 'column' },
                         }}
                         onClick={() =>
@@ -37,7 +37,7 @@ const YoutubePlaylist = ({ playlist, setVideoId }) => {
                         <Box sx={{ width: '100%', wordWrap: 'break-word' }}>
                             <Typography
                                 sx={{
-                                    fontSize: { sm: '1.5rem', md: '1.2rem' },
+                                    fontSize: { sm: '1.1rem', md: '1.3rem' },
                                     fontWeight: 'bold',
                                     color: 'tertiary.darker',
                                     display: 'inline-block',

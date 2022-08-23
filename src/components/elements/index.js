@@ -1,5 +1,6 @@
 export { AppCard } from './AppCard'
-export { SocialLinksSection } from './SocialLinksSection'
-export { JoinForm } from './JoinForm'
+export { CardArticle } from './CardArticle'
 export { GroupsModal } from './GroupsModal'
+export { JoinForm } from './JoinForm'
 export { LoadingProgress } from './LoadingProgress'
+export { SocialLinksSection } from './SocialLinksSection'

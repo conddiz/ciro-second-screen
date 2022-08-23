@@ -16,7 +16,7 @@ const DefaultMode = ({ config }) => {
     useEffect(() => {
         const fetchPlaylist = async () => {
             const data = await getYoutubePlaylist()
-            const playlist = JSON.parse(data.youtubePlaylistJson)
+            const playlist = data.youtubePlaylistJson
             const videoId = playlist.items[0].snippet.resourceId.videoId
 
             setPlaylist(playlist)
@@ -31,39 +31,33 @@ const DefaultMode = ({ config }) => {
             <Box
                 id={config.id}
                 sx={{
-                    flexGrow: 1,                
+                    flexGrow: 1,
                 }}
                 component="section"
             >
-                <Grid container spacing={1}>                
-                        <LoadingProgress loading={loading} />
-                        {!loading && playlist && (
-                            <>
-                                <Grid xs={12} md={8}>
-                                    <Box
-                                        sx={{
-                                                                                
-                                        }}
-                                    >
-                                        <YoutubePlayer videoId={videoId} />
-                                    </Box>
-                                </Grid>
-                                <Grid xs={12} md={4}>
-                                    <Box                        
-                                        sx={{                           
-                                            maxHeight: '434px',
-                                            overflow: 'scroll',
-                                        }}
-                                    >
-                                        <YoutubePlaylist
-                                            playlist={playlist}
-                                            setVideoId={setVideoId}
-                                        />
-                                    </Box>
-                                </Grid>
-                            </>
-                        )}                
-                </Grid>
+                <LoadingProgress loading={loading} />
+                {!loading && playlist && (
+                    <Grid container spacing={1} sx={{ alignItems: 'center' }}>
+                        <Grid item xs={12} md={9}>
+                            <Box>
+                                <YoutubePlayer videoId={videoId} />
+                            </Box>
+                        </Grid>
+                        <Grid item xs md>
+                            <Box
+                                sx={{
+                                    maxHeight: '485px',
+                                    overflow: 'scroll',
+                                }}
+                            >
+                                <YoutubePlaylist
+                                    playlist={playlist}
+                                    setVideoId={setVideoId}
+                                />
+                            </Box>
+                        </Grid>
+                    </Grid>
+                )}
             </Box>
         </Container>
     )

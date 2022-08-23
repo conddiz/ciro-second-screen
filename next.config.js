@@ -28,7 +28,7 @@ const nextConfig = {
         YOUTUBE_API_KEY: process.env.YOUTUBE_API_KEY,
     },
     images: {
-        domains: ['i.ytimg.com'],
+        domains: ['i.ytimg.com', 's3.amazonaws.com'],
     },
 }
 

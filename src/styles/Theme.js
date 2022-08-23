@@ -10,7 +10,7 @@ import {
 const Theme = createTheme({
     fonts: {
         primary: 'Montserrat',
-        secundary: 'Squada One',
+        secondary: 'Squada One',
         title: 'New Grotesk Square',
         body: 'Graphik',
     },
@@ -95,6 +95,27 @@ Theme.typography.title = {
     padding: '10px',
     fontWeight: '300',
     fontSize: '30px',
+}
+
+Theme.typography.pageTitle = {
+    fontFamily: Theme.fonts.title,
+    backgroundColor: Theme.palette.primary.lighter,
+    color: Theme.palette.tertiary.darker,
+    padding: '15px 10px 10px',
+    fontWeight: '500',
+    fontSize: '3em',
+    width: '100%',
+    textTransform: 'uppercase',
+    marginTop: '50px',
+    marginBottom: '50px',
+}
+
+Theme.typography.cardTitle = {
+    fontFamily: Theme.fonts.secondary,
+    color: Theme.palette.tertiary.darker,
+    margin: '0px 0px 20px',
+    fontWeight: '400',
+    fontSize: '20px',
 }
 
 export { Theme }

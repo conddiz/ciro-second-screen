@@ -11,8 +11,6 @@ const Layout = ({ children }) => {
             sx={{
                 display: 'flex',
                 padding: '0px',
-                //paddingLeft: '90px',
-                pl: { sm: '0', md: '10px', lg: '90px', xl: '90px' },
                 flexDirection: 'column',
                 gap: 0,
                 bgcolor: 'tertiary.darker',

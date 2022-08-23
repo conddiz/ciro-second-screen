@@ -12,7 +12,6 @@ import { SYSTEM_MODE } from '@ciro/constants'
 
 const getStaticProps = async ({ params }) => {
     const { data: config } = await getCiroTvConfig()
-
     return {
         props: {
             config: config,

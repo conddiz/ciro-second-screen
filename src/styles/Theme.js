@@ -153,16 +153,43 @@ Theme.typography.articleDate = {
         fontSize: '16px',
     },
 
-    // fontSize: {
-    //     xs: ['10px', '!important'],
-    //     sm: ['12px', '!important'],
-    //     sm: ['14px', '!important'],
-    //     sm: ['16px', '!important'],
-    //     sm: ['18px', '!important'],
-    // },
-
     color: Theme.palette.neutral.darker,
     marginBottom: '0',
+}
+
+Theme.typography.colorful = {
+    display: 'inline-flex',
+    gap: '10px',
+    background:
+        'linear-gradient(to right, #FF9D00, #FF9D00, #49BA27, #49BA27, #0096ED, #0096ED, #0096ED)',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    fontFamily: 'New Grotesk Square',
+
+    fontSize: '30px',
+    [Theme.breakpoints.up('sm')]: {
+        fontSize: '55px',
+    },
+    [Theme.breakpoints.up('md')]: {
+        fontSize: '63px',
+    },
+    [Theme.breakpoints.up('lg')]: {
+        fontSize: '83px',
+    },
+    [Theme.breakpoints.up('xl')]: {
+        fontSize: '83px',
+    },
+
+    fontWeight: '100',
+    '> span:nth-child(1)': {
+        fontWeight: '300',
+    },
+    '> span:nth-child(2)': {
+        fontWeight: '500',
+    },
+    '> span:nth-child(3)': {
+        fontWeight: '900',
+    },
 }
 
 export { Theme }

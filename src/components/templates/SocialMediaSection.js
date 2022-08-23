@@ -1,6 +1,14 @@
 import Image from 'next/image'
 
-import { Box, Container } from '@mui/material'
+import {
+    Box,
+    Container,
+    Typography,
+    List,
+    ListItem,
+    Button,
+    IconButton,
+} from '@mui/material'
 
 import { SOCIAL } from '@ciro/constants'
 
@@ -19,85 +27,75 @@ const SocialMediaSection = ({ children }) => {
                     sx={{
                         display: 'flex',
 
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                        alignItems: 'flex-end',
-                        px: '30px',
-                        py: '0',
-                        height: '304px',
-                        h2: {
-                            display: 'inline-block',
-                            fontSize: '83px',
-                            background:
-                                'linear-gradient(to right, #FF9D00, #FF9D00, #49BA27, #49BA27, #0096ED, #0096ED, #0096ED)',
-                            WebkitBackgroundClip: 'text',
-                            WebkitTextFillColor: 'transparent',
-                            fontFamily: 'New Grotesk Square',
-                            maxWidth: '737px',
-                            fontWeight: '200',
-                            '> span:nth-child(1)': {
-                                fontWeight: '300',
-                            },
-                            '> span:nth-child(2)': {
-                                fontWeight: '500',
-                            },
-                            '> span:nth-child(3)': {
-                                fontWeight: '900',
-                            },
+                        flexDirection: {
+                            xs: 'column-reverse',
+                            sm: 'column-reverse',
+                            md: 'column-reverse',
+                            lg: 'row',
+                            xl: 'row',
                         },
-                        ul: {
-                            maxWidth: '737px',
-                            flexDirection: 'row',
-                            justifyContent: 'space-between',
-                            margin: '-70px 0 0 -34px',
-                            display: 'inline-flex',
-                            alignItems: 'flex-start',
-                            justifyContent: 'center',
-                            columnGap: '20px',
-                            listStyle: 'none',
+
+                        justifyContent: {
+                            xs: 'center',
+                            sm: 'center',
+                            md: 'center',
+                            lg: 'space-between',
+                            xl: 'space-between',
                         },
-                        a: {
-                            width: '42px',
-                            height: 'auto',
-                            display: 'block',
-                            position: 'relative',
-                            '&:hover': {
-                                '&:after': {
-                                    opacity: 1,
-                                },
-                            },
-                            '&:after': {
-                                content: '""',
-                                width: '64px',
-                                height: '64px',
-                                backgroundColor: 'rgba(255, 255, 255, .1)',
-                                position: 'absolute',
-                                top: '50%',
-                                left: '51%',
-                                transform: 'translate(-50%, -50%)',
-                                borderRadius: '50%',
-                                opacity: 0,
-                                transition: 'all .2s ease -in',
-                            },
+                        alignItems: {
+                            xs: 'center',
+                            sm: 'center',
+                            md: 'center',
+                            lg: 'flex-end',
+                            xl: 'flex-end',
+                        },
+
+                        height: {
+                            xs: '100%',
+                            sm: '100%',
+                            md: '100%',
+                            lg: '304px',
+                            xl: '304px',
                         },
                     }}
                 >
                     <Box
                         sx={{
-                            flex: 1,
+                            flexGrow: 1,
                             display: 'flex',
                             flexDirection: 'column',
+                            justifyContent: 'space-around',
                             alignContent: 'center',
                             textAlign: 'center',
-                            // rowGap: '30px',
                             height: '100%',
+                            maxWidth: {
+                                xs: '100%',
+                                sm: '100%',
+                                md: '100%',
+                                lg: '60%',
+                                xl: '60%',
+                            },
                         }}
                     >
-                        <h2>
-                            VEM <span>PRA</span> <span>TURMA</span>{' '}
-                            <span>BOA</span>
-                        </h2>
-                        <ul>
+                        <Box>
+                            <Typography variant="colorful">
+                                VEM <span>PRA</span> <span>TURMA</span>{' '}
+                                <span>BOA</span>
+                            </Typography>
+                        </Box>
+                        <List
+                            sx={{
+                                maxWidth: '100%',
+                                display: 'flex',
+                                flexWrap: 'wrap',
+                                margin: '0',
+                                padding: '0',
+                                // flexDirection: 'row',
+                                // justifyContent: 'space-between',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                            }}
+                        >
                             {SOCIAL.map(
                                 ({
                                     id,
@@ -108,27 +106,65 @@ const SocialMediaSection = ({ children }) => {
                                     rel,
                                     ...props
                                 }) => (
-                                    <li key={id}>
-                                        <Link href={url + text}>
-                                            <a {...props}>
+                                    <ListItem
+                                        key={id}
+                                        sx={{
+                                            margin: '0',
+                                            padding: '0',
+                                            justifySelf: 'flex-end',
+                                            width: 'auto',
+                                        }}
+                                    >
+                                        <IconButton
+                                            aria-label="delete"
+                                            size="large"
+                                        >
+                                            <Box
+                                                sx={{
+                                                    position: 'relative',
+                                                    width: {
+                                                        xs: '24px',
+                                                        sm: '32px',
+                                                        md: '40px',
+                                                        lg: '48px',
+                                                        xl: '48px',
+                                                    },
+                                                }}
+                                            >
                                                 <Image
                                                     src={src}
                                                     alt="Ícone"
                                                     layout="responsive"
-                                                    width="24"
-                                                    height="24"
+                                                    width="48"
+                                                    height="48"
                                                 />
-                                            </a>
-                                        </Link>
-                                    </li>
+                                            </Box>
+                                        </IconButton>
+                                    </ListItem>
                                 )
                             )}
-                        </ul>
+                        </List>
                     </Box>
                     <Box
                         sx={{
                             display: 'flex',
+                            justifyContent: 'center',
                             alignItems: 'flex-end',
+                            mt: {
+                                xs: '20px',
+                                sm: '20px',
+                                md: '20px',
+                                lg: '0',
+                                xl: '0',
+                            },
+                            width: {
+                                xs: '40%',
+                                sm: '40%',
+                                md: '60%',
+                                lg: '80%',
+                                xl: '100%',
+                            },
+                            // position: 'relative',
                         }}
                     >
                         <Image

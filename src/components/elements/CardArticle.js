@@ -27,14 +27,14 @@ const CardArticle = ({ article, horizontal = false }) => {
                         height: '100%',
                         display: 'flex',
                         maxHeight: {
-                            xs: horizontal ? '185px' : '100%',
+                            xs: '100%',
                             sm: horizontal ? '185px' : '100%',
                             md: horizontal ? '185px' : '100%',
                             lg: '100%',
                             xl: '100%',
                         },
                         flexDirection: {
-                            xs: horizontal ? 'row' : 'column',
+                            xs: 'column',
                             sm: horizontal ? 'row' : 'column',
                             md: horizontal ? 'row' : 'column',
                             lg: 'column',
@@ -48,7 +48,7 @@ const CardArticle = ({ article, horizontal = false }) => {
                                 display: 'flex',
                                 flexDirection: 'row',
                                 width: {
-                                    xs: horizontal ? '185px' : '100%',
+                                    xs: '100%',
                                     sm: horizontal ? '185px' : '100%',
                                     md: horizontal ? '185px' : '100%',
                                     lg: '100%',

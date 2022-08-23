@@ -134,13 +134,35 @@ Theme.typography.articleTitle = {
 
 Theme.typography.articleDate = {
     display: 'block',
-    fontFamily: Theme.fonts.primary,
-    fontStyle: 'normal',
+    fontFamily: Theme.fonts.body,
+    // fontStyle: 'normal',
     fontWeight: 'normal',
-    fontSize: { xs: '14px', sm: '18px' },
-    lineHeight: { xs: '20px', sm: '24px' },
+
+    fontSize: '12px',
+
+    [Theme.breakpoints.up('sm')]: {
+        fontSize: '13px',
+    },
+    [Theme.breakpoints.up('md')]: {
+        fontSize: '14px',
+    },
+    [Theme.breakpoints.up('lg')]: {
+        fontSize: '15px',
+    },
+    [Theme.breakpoints.up('xl')]: {
+        fontSize: '16px',
+    },
+
+    // fontSize: {
+    //     xs: ['10px', '!important'],
+    //     sm: ['12px', '!important'],
+    //     sm: ['14px', '!important'],
+    //     sm: ['16px', '!important'],
+    //     sm: ['18px', '!important'],
+    // },
+
     color: Theme.palette.neutral.darker,
-    marginBottom: '25px',
+    marginBottom: '0',
 }
 
 export { Theme }

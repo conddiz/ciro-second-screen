@@ -62,18 +62,20 @@ const PaginaArtigo = ({ article, articles, error }) => {
             </Typography>
             <BoxMain>
                 <BoxContent>
-                    <Typography variant="articleDate" component="div">
-                        Publicado em{' '}
-                        {new Date(article.createdAt).toLocaleDateString()} |
-                        Atualizado em{' '}
-                        {new Date(article.createdAt).toLocaleDateString()}
-                    </Typography>
-                    <Box
-                        sx={{
-                            fontSize: { sm: '1rem', md: '1.2rem' },
-                        }}
-                    >
-                        <ReactMarkdown>{article.content}</ReactMarkdown>
+                    <Box sx={{ pt: '20px' }}>
+                        <Typography variant="articleDate" component="div">
+                            Publicado em{' '}
+                            {new Date(article.createdAt).toLocaleDateString()} |
+                            Atualizado em{' '}
+                            {new Date(article.createdAt).toLocaleDateString()}
+                        </Typography>
+                        <Box
+                            sx={{
+                                fontSize: { sm: '1rem', md: '1.2rem' },
+                            }}
+                        >
+                            <ReactMarkdown>{article.content}</ReactMarkdown>
+                        </Box>
                     </Box>
                 </BoxContent>
                 <BoxAside>

@@ -18,12 +18,16 @@ import {
 
 import { BsPlayFill, BsYoutube } from 'react-icons/bs'
 
+import { FormattedDistanceFromDate } from '@ciro/components/elements'
+
 import { getYoutubePlaylist } from '@ciro/api'
 
 const YoutubePlaylist = ({ playlist, setVideoId, horizontal = false }) => {
     const handleClick = (videoId) => {
         setVideoId(videoId)
     }
+
+    console.log('playlist', playlist)
 
     return (
         <Box>
@@ -119,6 +123,24 @@ const YoutubePlaylist = ({ playlist, setVideoId, horizontal = false }) => {
                             >
                                 {item.snippet.title}
                             </Typography>
+                            <Typography variant="articleDate">
+                                a{' '}
+                                <FormattedDistanceFromDate
+                                    dateString={item.snippet.publishedAt}
+                                    dateFormatFrom="yyyy-MM-dd'T'HH:mm:ss'Z'"
+                                />
+                            </Typography>
+                            <Divider
+                                sx={{
+                                    display: {
+                                        xs: 'flex',
+                                        sm: 'flex',
+                                        md: 'flex',
+                                        lg: 'none',
+                                        xl: 'none',
+                                    },
+                                }}
+                            />
                             {horizontal && (
                                 <Box
                                     sx={{
@@ -131,7 +153,6 @@ const YoutubePlaylist = ({ playlist, setVideoId, horizontal = false }) => {
                                         },
                                     }}
                                 >
-                                    <Divider />
                                     <Box
                                         sx={{
                                             paddingRight: '10px',

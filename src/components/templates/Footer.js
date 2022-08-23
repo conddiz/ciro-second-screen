@@ -24,9 +24,22 @@ const Footer = () => {
                     sx={{
                         width: '100%',
                         mx: '15px',
-                        my: '45px',
+                        my: {
+                            xs: '25px',
+                            sm: '25px',
+                            md: '25px',
+                            lg: '45px',
+                            xl: '45px',
+                        },
                         display: 'flex',
-                        flexDirection: 'row',
+                        gap: 5,
+                        flexDirection: {
+                            xs: 'column',
+                            sm: 'column',
+                            md: 'row',
+                            lg: 'row',
+                            xl: 'row',
+                        },
                         justifyContent: 'space-between',
                         alignItems: 'center',
                     }}

@@ -5,7 +5,6 @@ import { Timeline } from 'react-twitter-widgets'
 import { LoadingProgress } from '@ciro/components/elements'
 
 const TwitterFeed = ({ twitterId }) => {
-    console.log('twitterId', twitterId)
     const [loading, setLoading] = useState(true)
 
     return (

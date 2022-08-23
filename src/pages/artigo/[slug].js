@@ -44,9 +44,6 @@ const getStaticProps = async ({ params }) => {
 }
 
 const PaginaArtigo = ({ article, articles, error }) => {
-    console.log('article', article)
-    console.log('articles', articles)
-
     if (!article) {
         return <Error statusCode={404} />
     }

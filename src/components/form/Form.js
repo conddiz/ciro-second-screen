@@ -11,13 +11,12 @@ const Form = ({
     sx,
     ...props
 }) => {
-    const { register, handleSubmit, formState, control, watch, setValue } =
-        useForm({
-            criteriaMode: 'all',
-            mode: 'onChange',
-            defaultValues: defaultValues,
-            resolver: yupResolver(validations),
-        })
+    const { register, handleSubmit, formState, control, setValue } = useForm({
+        criteriaMode: 'all',
+        mode: 'onChange',
+        defaultValues: defaultValues,
+        resolver: yupResolver(validations),
+    })
 
     const formProps = {
         register: register,

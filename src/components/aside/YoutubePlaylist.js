@@ -27,8 +27,6 @@ const YoutubePlaylist = ({ playlist, setVideoId, horizontal = false }) => {
         setVideoId(videoId)
     }
 
-    console.log('playlist', playlist)
-
     return (
         <Box>
             <List>

@@ -13,7 +13,6 @@ const DebateMode = ({ config }) => {
     useEffect(() => {
         const fetchPlaylist = async () => {
             const articles = await getArticles(config.artigo_tags)
-            console.log(articles)
 
             setArticles(articles)
             setLoading(false)

@@ -4,9 +4,6 @@ import ReCAPTCHA from 'react-google-recaptcha'
 import _ from 'lodash'
 import TagManager from 'react-gtm-module'
 
-// import * as S from './JoinForm.styles'
-// import { GroupsModal } from '@ciro/components/elements'
-
 import { CEP_MASK, PHONE_MASK } from '@ciro/constants'
 
 import {
@@ -38,7 +35,7 @@ const JoinForm = () => {
     const [message, setMessage] = useState()
     const [event, setFormEvent] = useState({})
     const [formData, setFormData] = useState({})
-    const [formRef, setFormRef] = useState({})
+    // const [formRef, setFormRef] = useState({})
     const [success, setSuccess] = useState(false)
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [group, setGroup] = useState(null)
@@ -110,6 +107,7 @@ const JoinForm = () => {
     }
 
     const handleSubmit = async (data) => {
+        console.log('handleSubmit', data)
         setFormData(data)
 
         const gtmData = {
@@ -204,13 +202,26 @@ const JoinForm = () => {
                 </Alert>
             )}
 
+            <Box sx={{ display: 'none' }}>
+                <ReCAPTCHA
+                    ref={recaptchaRef}
+                    size="invisible"
+                    sitekey={process.env.RECAPTCHA_SITE}
+                    onChange={onReCAPTCHAChange}
+                    onSubmit={handleSubmit}
+                    id="registerForm"
+                    validations={validations}
+                />
+            </Box>
             <Form
-                action="/api/save-lead"
-                method="POST"
+                // action="/api/save-lead"
                 onSubmit={handleSubmit}
+                method="POST"
                 id="registerForm"
                 validations={validations}
-                ref={(el) => setFormRef(el)}
+                noValidate
+                autoComplete="off"
+                // ref={(el) => setFormRef(el)}
                 sx={{
                     display: 'grid',
                     gridTemplateColumns: { xs: '1fr', lg: 'repeat(2, 1fr)' },
@@ -224,17 +235,6 @@ const JoinForm = () => {
                     mt: '20px',
                 }}
             >
-                <Box sx={{ display: 'none' }}>
-                    <ReCAPTCHA
-                        ref={recaptchaRef}
-                        size="invisible"
-                        sitekey={process.env.RECAPTCHA_SITE}
-                        onChange={onReCAPTCHAChange}
-                        onSubmit={handleSubmit}
-                        id="registerForm"
-                        validations={validations}
-                    />
-                </Box>
                 <InputText
                     type="email"
                     name="email"
@@ -252,24 +252,23 @@ const JoinForm = () => {
                     name="permiteWhats"
                     label=" Quero fazer parte do grupo Aliança Rebelde"
                 />
-                <LoadingButton
-                    type="submit"
-                    color="primary"
-                    form="registerForm"
-                    loading={loading}
-                    variant="contained"
-                    size="large"
-                    fullWidth
-                >
-                    Enviar
-                </LoadingButton>
-
-                <GroupsModal
-                    open={isModalOpen && checked}
-                    setOpen={setIsModalOpen}
-                    group={group}
-                />
             </Form>
+            <GroupsModal
+                open={isModalOpen && checked}
+                setOpen={setIsModalOpen}
+                group={group}
+            />
+            <LoadingButton
+                type="submit"
+                color="primary"
+                form="registerForm"
+                loading={loading}
+                variant="contained"
+                size="large"
+                fullWidth
+            >
+                Enviar
+            </LoadingButton>
         </Box>
     )
 }

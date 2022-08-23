@@ -69,6 +69,7 @@ const CardArticle = ({ article, horizontal = false }) => {
                             )}
                         </Box>
                     </CardMedia>
+
                     <CardContent>
                         <Typography variant="cardTitle" component="h2">
                             {article.title}

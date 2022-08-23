@@ -6,9 +6,6 @@ const BoxContent = ({ children }) => {
             sx={{
                 display: 'flex',
                 flexDirection: 'column',
-
-                pt: '20px',
-                pb: { md: '20px', lg: '80px' },
                 width: { md: '100%', lg: '70%' },
             }}
         >

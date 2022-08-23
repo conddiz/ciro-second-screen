@@ -1,10 +1,15 @@
 import { useState, useEffect } from 'react'
 
 import { Box, Container } from '@mui/material'
-import Grid from '@mui/material/Unstable_Grid2'
 import { YoutubePlayer } from '@ciro/components/main'
 import { YoutubePlaylist } from '@ciro/components/aside'
-import { LoadingProgress } from '@ciro/components/elements'
+
+import {
+    LoadingProgress,
+    BoxMain,
+    BoxAside,
+    BoxContent,
+} from '@ciro/components/elements'
 
 import { getYoutubePlaylist } from '@ciro/api'
 
@@ -28,37 +33,23 @@ const DefaultMode = ({ config }) => {
 
     return (
         <Container>
-            <Box
-                id={config.id}
-                sx={{
-                    flexGrow: 1,
-                }}
-                component="section"
-            >
-                <LoadingProgress loading={loading} />
-                {!loading && playlist && (
-                    <Grid container spacing={1} sx={{ alignItems: 'center' }}>
-                        <Grid item xs={12} md={9}>
-                            <Box>
-                                <YoutubePlayer videoId={videoId} />
-                            </Box>
-                        </Grid>
-                        <Grid item xs md>
-                            <Box
-                                sx={{
-                                    maxHeight: '485px',
-                                    overflow: 'scroll',
-                                }}
-                            >
-                                <YoutubePlaylist
-                                    playlist={playlist}
-                                    setVideoId={setVideoId}
-                                />
-                            </Box>
-                        </Grid>
-                    </Grid>
-                )}
-            </Box>
+            <LoadingProgress loading={loading} />
+            {!loading && playlist && (
+                <BoxMain id={config.id}>
+                    <BoxContent>
+                        <Box>
+                            <YoutubePlayer videoId={videoId} />
+                        </Box>
+                    </BoxContent>
+                    <BoxAside>
+                        <YoutubePlaylist
+                            playlist={playlist}
+                            setVideoId={setVideoId}
+                            horizontal={true}
+                        />
+                    </BoxAside>
+                </BoxMain>
+            )}
         </Container>
     )
 }

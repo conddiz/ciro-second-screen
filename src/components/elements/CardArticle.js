@@ -14,7 +14,7 @@ import {
 
 const CardArticle = ({ article }) => {
     return (
-        <Link href={`/artigo/${article.slug}`}>
+        <Link href={`/artigo/${article.slug}`} passHref={true}>
             <Box
                 component="a"
                 sx={{

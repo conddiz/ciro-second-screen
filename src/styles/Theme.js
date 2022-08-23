@@ -118,4 +118,29 @@ Theme.typography.cardTitle = {
     fontSize: '20px',
 }
 
+Theme.typography.articleTitle = {
+    fontFamily: Theme.fonts.title,
+    backgroundColor: Theme.palette.primary.lighter,
+    color: Theme.palette.tertiary.darker,
+    padding: '15px 10px 10px',
+    fontWeight: '500',
+    fontSize: '1.5em',
+    lineHeight: '1.5em',
+    width: '100%',
+    textTransform: 'uppercase',
+    marginTop: '20px',
+    marginBottom: '20px',
+}
+
+Theme.typography.articleDate = {
+    display: 'block',
+    fontFamily: Theme.fonts.primary,
+    fontStyle: 'normal',
+    fontWeight: 'normal',
+    fontSize: { xs: '14px', sm: '18px' },
+    lineHeight: { xs: '20px', sm: '24px' },
+    color: Theme.palette.neutral.darker,
+    marginBottom: '25px',
+}
+
 export { Theme }

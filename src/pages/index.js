@@ -7,7 +7,7 @@ import {
     DefaultMode,
     PoliticalAdvertisingTimeMode,
 } from '@ciro/components/mode'
-import { getCiroTvConfig, getYoutubePlaylist } from '@ciro/api'
+import { getCiroTvConfig } from '@ciro/api'
 import { SYSTEM_MODE } from '@ciro/constants'
 
 const getStaticProps = async ({ params }) => {

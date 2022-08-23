@@ -1,3 +1,3 @@
 export { getCiroTvConfig } from './CiroTvApi'
 export { getYoutubePlaylist } from './YoutubePlaylistApi'
-export { getArticles } from './ArticlesApi'
+export { getArticles, getArticlesPaths, getArticleData } from './ArticlesApi'

@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 
 import { Box, Container, Grid, Typography } from '@mui/material'
-import Masonry from '@mui/lab/Masonry'
 
 import { LoadingProgress, CardArticle } from '@ciro/components/elements'
 import { getArticles } from '@ciro/api'

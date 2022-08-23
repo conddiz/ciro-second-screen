@@ -58,20 +58,26 @@ const PaginaArtigo = ({ article, articles, error }) => {
         <Container sx={{}}>
             <Box
                 sx={{
-                    // flexGrow: 1,
                     display: 'flex',
-                    flexDirection: { md: 'column', lg: 'row' },
+                    flexDirection: {
+                        xs: 'column',
+                        sm: 'column',
+                        md: 'column',
+                        lg: 'row',
+                        xl: 'row',
+                    },
                     gap: 2,
                 }}
                 component="section"
             >
                 <Box
                     sx={{
-                        flexGrow: 1,
                         display: 'flex',
                         flexDirection: 'column',
+
                         pt: '60px',
-                        pb: '80px',
+                        pb: { md: '20px', lg: '80px' },
+                        width: { md: '100%', lg: '70%' },
                     }}
                 >
                     <Typography variant="articleTitle" component="h1">
@@ -92,28 +98,49 @@ const PaginaArtigo = ({ article, articles, error }) => {
                     </Box>
                 </Box>
                 <Box
-                    id={article.id}
                     sx={{
                         display: 'flex',
                         flexDirection: 'column',
-                        gap: 4,
-                        height: '100%',
-                        backgroundColor: 'neutral.light',
-                        pt: '80px',
-                        pb: '80px',
-                        px: '20px',
-                        maxHeight: '200vh',
-                        overflowY: 'scroll',
+                        width: { md: '100%', lg: '30%' },
+                        backgroundColor: { md: '', lg: 'neutral.light' },
+                        py: { md: '20px', lg: '60px' },
+                        px: { md: '0px', lg: '20px' },
+                        overflowY: {
+                            md: 'initial',
+                            lg: 'scroll',
+                        },
                     }}
                     component="aside"
                 >
-                    {articles.map((article) => {
-                        return (
-                            <Box key={article.id}>
-                                <CardArticle article={article} />
-                            </Box>
-                        )
-                    })}
+                    <Typography
+                        variant="articleTitle"
+                        component="h1"
+                        backgroundColor="secondary.main"
+                    >
+                        Artigos relacionados
+                    </Typography>
+
+                    <Box
+                        sx={{
+                            flexBasis: { md: '', lg: '0px' },
+                            flexGrow: '1',
+                            overflowY: {
+                                md: 'initial',
+                                lg: 'auto',
+                            },
+                            gap: 4,
+                            display: 'flex',
+                            flexDirection: 'column',
+                        }}
+                    >
+                        {articles.map((article) => {
+                            return (
+                                <Box key={article.id}>
+                                    <CardArticle article={article} />
+                                </Box>
+                            )
+                        })}
+                    </Box>
                 </Box>
             </Box>
         </Container>

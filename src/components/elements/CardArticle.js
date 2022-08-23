@@ -25,14 +25,17 @@ const CardArticle = ({ article }) => {
                     sx={{
                         borderRadius: '0',
                         height: '100%',
+                        display: 'flex',
+                        maxHeight: { md: '185px', lg: '100%' },
+                        flexDirection: { md: 'row', lg: 'column' },
                     }}
                 >
-                    <CardMedia height="185px">
+                    <CardMedia>
                         <Box
                             sx={{
                                 display: 'flex',
                                 flexDirection: 'row',
-                                width: '100%',
+                                width: { md: '185px', lg: '100%' },
                                 height: '185px',
                                 justifyContent: 'flex-end',
                                 position: 'relative',

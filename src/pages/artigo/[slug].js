@@ -87,8 +87,17 @@ const PaginaArtigo = ({ article, articles, error }) => {
 
                     {articles.map((article) => {
                         return (
-                            <Box key={article.id}>
-                                <CardArticle article={article} />
+                            <Box
+                                key={article.id}
+                                sx={{
+                                    mb: 2,
+                                    width: '100%',
+                                }}
+                            >
+                                <CardArticle
+                                    article={article}
+                                    horizontal={true}
+                                />
                             </Box>
                         )
                     })}

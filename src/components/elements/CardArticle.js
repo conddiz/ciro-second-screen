@@ -12,7 +12,7 @@ import {
     Typography,
 } from '@mui/material'
 
-const CardArticle = ({ article }) => {
+const CardArticle = ({ article, horizontal = false }) => {
     return (
         <Link href={`/artigo/${article.slug}`} passHref={true}>
             <Box
@@ -26,8 +26,20 @@ const CardArticle = ({ article }) => {
                         borderRadius: '0',
                         height: '100%',
                         display: 'flex',
-                        maxHeight: { md: '185px', lg: '100%' },
-                        flexDirection: { md: 'row', lg: 'column' },
+                        maxHeight: {
+                            xs: horizontal ? '185px' : '100%',
+                            sm: horizontal ? '185px' : '100%',
+                            md: horizontal ? '185px' : '100%',
+                            lg: '100%',
+                            xl: '100%',
+                        },
+                        flexDirection: {
+                            xs: horizontal ? 'row' : 'column',
+                            sm: horizontal ? 'row' : 'column',
+                            md: horizontal ? 'row' : 'column',
+                            lg: 'column',
+                            xl: 'column',
+                        },
                     }}
                 >
                     <CardMedia>
@@ -35,7 +47,13 @@ const CardArticle = ({ article }) => {
                             sx={{
                                 display: 'flex',
                                 flexDirection: 'row',
-                                width: { md: '185px', lg: '100%' },
+                                width: {
+                                    xs: horizontal ? '185px' : '100%',
+                                    sm: horizontal ? '185px' : '100%',
+                                    md: horizontal ? '185px' : '100%',
+                                    lg: '100%',
+                                    xl: '100%',
+                                },
                                 height: '185px',
                                 justifyContent: 'flex-end',
                                 position: 'relative',

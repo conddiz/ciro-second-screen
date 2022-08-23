@@ -162,7 +162,14 @@ const JoinForm = () => {
     })
 
     return (
-        <Box>
+        <Box
+            sx={{
+                width: '100%',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+            }}
+        >
             {message && (
                 <Alert
                     severity={message.level}
@@ -206,7 +213,7 @@ const JoinForm = () => {
                 ref={(el) => setFormRef(el)}
                 sx={{
                     display: 'grid',
-                    gridTemplateColumns: { xs: '1fr', md: 'repeat(2, 1fr)' },
+                    gridTemplateColumns: { xs: '1fr', lg: 'repeat(2, 1fr)' },
                     gap: '20px',
                     alignItems: 'flex-start',
                     justifyContent: 'flex-start',

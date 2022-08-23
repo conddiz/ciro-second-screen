@@ -95,6 +95,7 @@ Theme.typography.title = {
     padding: '10px',
     fontWeight: '300',
     fontSize: '30px',
+    width: '100%',
 }
 
 Theme.typography.pageTitle = {

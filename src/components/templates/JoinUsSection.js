@@ -32,7 +32,13 @@ const JoinUsSection = () => {
                             alignItems: 'flex-start',
                             justifyContent: 'flex-start',
                             gap: '20px',
-                            width: { xs: '100%', md: '50%' },
+                            width: {
+                                xs: '100%',
+                                sm: '100%',
+                                md: '50%',
+                                lg: '50%',
+                                xl: '50%',
+                            },
                         }}
                     >
                         <Typography variant="title" component="h2">
@@ -45,6 +51,7 @@ const JoinUsSection = () => {
                     <Box
                         sx={{
                             width: { xs: '100%', md: '50%' },
+
                             backgroundColor: 'primary.lighter',
                             display: 'flex',
                             alignItems: 'center',

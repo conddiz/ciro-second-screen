@@ -6,6 +6,7 @@ import ReactMarkdown from 'react-markdown'
 import { Box, Container, Grid, Typography } from '@mui/material'
 import { LoadingProgress, CardArticle } from '@ciro/components/elements'
 
+import { BoxMain, BoxAside, BoxContent } from '@ciro/components/elements'
 import { getArticles, getArticlesPaths, getArticleData } from '@ciro/api'
 
 const getStaticPaths = async () => {
@@ -59,30 +60,8 @@ const PaginaArtigo = ({ article, articles, error }) => {
             <Typography variant="articleTitle" component="h1" sx={{ mb: 0 }}>
                 {article.title}
             </Typography>
-            <Box
-                sx={{
-                    display: 'flex',
-                    flexDirection: {
-                        xs: 'column',
-                        sm: 'column',
-                        md: 'column',
-                        lg: 'row',
-                        xl: 'row',
-                    },
-                    gap: 2,
-                }}
-                component="section"
-            >
-                <Box
-                    sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-
-                        pt: '20px',
-                        pb: { md: '20px', lg: '80px' },
-                        width: { md: '100%', lg: '70%' },
-                    }}
-                >
+            <BoxMain>
+                <BoxContent>
                     <Typography variant="articleDate" component="div">
                         Publicado em{' '}
                         {new Date(article.createdAt).toLocaleDateString()} |
@@ -96,53 +75,25 @@ const PaginaArtigo = ({ article, articles, error }) => {
                     >
                         <ReactMarkdown>{article.content}</ReactMarkdown>
                     </Box>
-                </Box>
-                <Box
-                    sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        width: { md: '100%', lg: '30%' },
-                        backgroundColor: { md: '', lg: 'neutral.light' },
-                        py: '20px',
-                        px: { md: '0px', lg: '20px' },
-                        overflowY: {
-                            md: 'initial',
-                            lg: 'scroll',
-                        },
-                    }}
-                    component="aside"
-                >
-                    <Box
-                        sx={{
-                            flexBasis: { md: '', lg: '0px' },
-                            flexGrow: '1',
-                            overflowY: {
-                                md: 'initial',
-                                lg: 'auto',
-                            },
-                            gap: 4,
-                            display: 'flex',
-                            flexDirection: 'column',
-                        }}
+                </BoxContent>
+                <BoxAside>
+                    <Typography
+                        variant="articleTitle"
+                        component="h1"
+                        backgroundColor="secondary.main"
                     >
-                        <Typography
-                            variant="articleTitle"
-                            component="h1"
-                            backgroundColor="secondary.main"
-                        >
-                            Artigos relacionados
-                        </Typography>
+                        Artigos relacionados
+                    </Typography>
 
-                        {articles.map((article) => {
-                            return (
-                                <Box key={article.id}>
-                                    <CardArticle article={article} />
-                                </Box>
-                            )
-                        })}
-                    </Box>
-                </Box>
-            </Box>
+                    {articles.map((article) => {
+                        return (
+                            <Box key={article.id}>
+                                <CardArticle article={article} />
+                            </Box>
+                        )
+                    })}
+                </BoxAside>
+            </BoxMain>
         </Container>
     )
 }
